@@ -39,7 +39,22 @@ public class GameStatus {
         return true;
     }
 
-    
+    private String leftAttemptsAsString() {
+        int leftAttempts = maxAttempts - failedAttempts;
+        return "(" + leftAttempts + ")";
+    }
+
+    private String phraseStateAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Character c : phraseState) {
+            if (c == null) {
+                stringBuilder.append('_');
+            } else {
+                stringBuilder.append(c);
+            }
+        }
+     return stringBuilder.toString();
+    }
 }
 
 
