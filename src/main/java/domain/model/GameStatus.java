@@ -67,6 +67,14 @@ public class GameStatus {
     public void updateHistory(char letter) {
         history.add(letter);
     }
+
+    public int getTotalAttemts() {
+        return  successAttemps + failedAttempts;
+    }
+
+    public boolean historyContains(char letter) {
+        return history.contains(letter);
+    }
 }
 
 
