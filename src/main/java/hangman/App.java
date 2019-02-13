@@ -22,12 +22,21 @@ public class App {
             System.out.println("Podaj lierę:");
             char letter = scanner.nextLine().charAt(0);
             hangmanGameService.processNextLatter(letter, gameStatus);
+            System.out.println(gameStatus.getCurrentPhraseStateWithLeftAttempts());
 
         } while (!gameStatus.isGameFinished());
 
+        switch (gameStatus.getFinishedGameStatus()) {
+            case WON:
+                System.out.println("Gratulacje. Wygrales w " + gameStatus.getTotalAttemts() + "krokach");
+                break;
+            case LOSE:
+                System.out.println("Przegrales");
+                break;
+            case RUNNING:
+                System.out.println("Cos poszlo nie tak");
 
-
-
+        }
 
     }
 
