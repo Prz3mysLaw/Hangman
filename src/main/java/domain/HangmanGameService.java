@@ -28,7 +28,30 @@ public class HangmanGameService {
         return new GameStatus(phrase, 7);
     }
 
+    public void processNextLatter(char letter, GameStatus gameStatus){
+        String phrase = gameStatus.getPhrase();
 
+        boolean letterAlreadyUsed = gameStatus.historyContains(letter);
+        if (letterAlreadyUsed){
+            gameStatus.incrementFailureCounter();
+        } else {
+            List<Integer> letterIds = performCharacter(letter, phrase);
+            final Character[] phraseState = gameStatus.getPhraseState();
+            letterIds.forEach(index ->
+            {phraseState[index] = gameStatus.getPhrase().charAt(index);});
+            performCharacterIncrement(letterIds.size() > 0, gameStatus);
+        }
+        gameStatus.updateHistory(letter);
+    }
+
+    private void performCharacterIncrement(boolean success, GameStatus gameStatus) {
+        if (success){
+            gameStatus.incrementSuccessCounter();
+        } else {
+            gameStatus.incrementFailureCounter();
+        }
+
+    }
 
 
 }
