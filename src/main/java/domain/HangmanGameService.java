@@ -1,5 +1,7 @@
 package domain;
 
+import domain.model.GameStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,11 @@ public class HangmanGameService {
         return Character.toLowerCase(a) == Character.toLowerCase(b);
     }
 
-    
+    public GameStatus createGameStatus(String phrase){
+        return new GameStatus(phrase, 7);
+    }
+
+
 
 
 }
