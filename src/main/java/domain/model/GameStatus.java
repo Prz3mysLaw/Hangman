@@ -55,6 +55,18 @@ public class GameStatus {
         }
      return stringBuilder.toString();
     }
+
+    public void incrementFailureCounter() {
+        failedAttempts++;
+    }
+
+    public void incrementSuccessCounter() {
+        successAttemps++;
+    }
+
+    public void updateHistory(char letter) {
+        history.add(letter);
+    }
 }
 
 
