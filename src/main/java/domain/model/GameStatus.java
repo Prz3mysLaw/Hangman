@@ -3,6 +3,7 @@ package domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class GameStatus {
 
     public GameStatus(String phrase, Integer maxAttempts) {
         this.phrase = phrase;
-        this.phraseState = phraseState;
+        this.phraseState = new GameStatusHelper().preparePhraseState(phrase);
         this.maxAttempts = maxAttempts;
         this.successAttemps = 0;
         this.failedAttempts = 0;
@@ -74,6 +75,22 @@ public class GameStatus {
 
     public boolean historyContains(char letter) {
         return history.contains(letter);
+    }
+
+    public static  class GameStatusHelper {
+        public Character[] preparePhraseState(String phrase){
+            char[] chars = phrase.toCharArray();
+            Character[] result = new Character[chars.length];
+
+            for (int i = 0; i < chars.length; i++) {
+                if (!Character.isLetter(chars[i])){
+                    result[i] = chars[i];
+                }
+            }
+
+            return  result;
+
+        }
     }
 }
 
